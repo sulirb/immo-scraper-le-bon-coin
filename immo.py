@@ -26,9 +26,9 @@ if script_immo:
     json_content = script_immo.string 
     with open("immo.json", "w", encoding="utf-8") as f:
         f.write(json_content)
-    print("Le contenu JSON a été enregistré dans 'immo.json'")
+    print("Webpage content has been saved in 'immo.json'")
 else:
-    print("Le script '__NEXT_DATA__' n'a pas été trouvé.")
+    print("'__NEXT_DATA__' script not found.")
 
 driver.quit()
 
@@ -55,21 +55,21 @@ for announce_id in square_values.keys():
     if announce_id in price_values:
         joined_data[announce_id] = {
         "m2": square_values[announce_id],
-        "prix": price_values[announce_id],
-        "prix au m2": price_values[announce_id] // square_values[announce_id]
+        "price": price_values[announce_id],
+        "price per m2": price_values[announce_id] // square_values[announce_id]
              }
             
-print("Liste des logements:")
+print("Housing list:")
 print(joined_data)
     
 total_square = 0
 total_price = 0
 for details in joined_data.values():
     total_square += details['m2']
-    total_price += details['prix']
+    total_price += details['price']
 
 print(f"Total m2: {total_square}")
-print(f"Total m2: {total_price}")
+print(f"Total m2 prices: {total_price}")
 
 nbr_houses = len(joined_data)
 price_by_square = round(total_price/total_square)
@@ -79,7 +79,7 @@ current_date = datetime.now()
 
 with open("immo.txt", "a",  encoding="utf-8") as f:
     f.write(f"\n{current_date.strftime("%d/%m/%Y, %H:%M")}\n")
-    f.write(f"Logements : {nbr_houses}\n")
-    f.write(f"Prix moyen du m2 : {price_by_square}\n")
-    f.write(f"Prix moyen des logements : {avg_price}\n")
-    print("Les articles ont été mis à jour")
+    f.write(f"Housings: {nbr_houses}\n")
+    f.write(f"Average price per square metre : {price_by_square}\n")
+    f.write(f"Average housing price : {avg_price}\n")
+    print("Housing list has been updated")
